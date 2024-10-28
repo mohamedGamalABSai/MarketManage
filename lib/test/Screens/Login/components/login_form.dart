@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vegan_admin_panel/consts/colors.dart';
+import 'package:vegan_admin_panel/main.dart';
 import 'package:vegan_admin_panel/test/Screens/Login/provider/login_provider.dart';
 
 class LoginForm extends StatelessWidget {
@@ -74,8 +75,14 @@ class LoginForm extends StatelessWidget {
 
                         // Assuming successful authentication, navigate to the home page:
                         if (authProvider.isLoggedIn) {
-                          Navigator.pushNamed(context,
-                              '/home'); // Replace '/home' with your actual home page route
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LoadedScreen();
+                              },
+                            ),
+                          ); // Replace '/home' with your actual home page route
                         }
                       }
                     },

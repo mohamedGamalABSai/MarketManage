@@ -19,11 +19,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: 'AIzaSyBQg2x515_ZE4es_M7qHBlZAJHoiIklSRA',
-      messagingSenderId: '',
-      projectId: 'vegan-market-1d92d',
-      appId: '1:758887531690:web:c70a8b5a1b396b9a02fcd3',
-      storageBucket: 'vegan-market-1d92d.appspot.com',
+      projectId: 'market-abs',
+      appId: '1:864053868336:android:ae8be7018e132a1fbbfaf5',
+      apiKey: 'AIzaSyA0-Z44110Cv8NBYc-LcvmasZe-I1v4FPU',
+      storageBucket: "market-abs.appspot.com",
+      messagingSenderId: "864053868336",
     ),
   );
 

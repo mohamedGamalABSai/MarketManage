@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:vegan_admin_panel/consts/colors.dart';
+import 'package:vegan_admin_panel/test/Screens/Login/login_screen.dart';
+import 'package:vegan_admin_panel/test/Screens/Login/provider/login_provider.dart';
 import 'package:vegan_admin_panel/widgets/profile_card.dart';
 import 'package:vegan_admin_panel/widgets/search_feild.dart';
 
@@ -12,6 +15,8 @@ PreferredSizeWidget myAppBar({
   required String title,
   required bool tabBarCheck,
 }) {
+  final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
   return AppBar(
     elevation: 20,
     surfaceTintColor: AppColors.whiteColor,
@@ -41,7 +46,7 @@ PreferredSizeWidget myAppBar({
       const SizedBox(width: 25),
       ..._buildIconButtons(),
       const SizedBox(width: 15),
-      _buildProfileMenu(),
+      _buildProfileMenu(authProvider),
       const SizedBox(width: 25),
     ],
   );
@@ -66,7 +71,7 @@ List<Widget> _buildIconButtons() {
   }).toList();
 }
 
-Widget _buildProfileMenu() {
+Widget _buildProfileMenu(AuthProvider authprovider) {
   return PopupMenuButton<dynamic>(
     color: Colors.white,
     surfaceTintColor: Colors.white,
@@ -85,13 +90,7 @@ Widget _buildProfileMenu() {
           onTap: () {},
         ),
       ),
-      PopupMenuItem(
-        child: ProfileCard(
-          title: 'Dark Mode',
-          leading: Icons.dark_mode_outlined,
-          onTap: () {},
-        ),
-      ),
+
       PopupMenuItem(
         child: Column(
           children: [
@@ -100,7 +99,13 @@ Widget _buildProfileMenu() {
             ProfileCard(
               title: 'Logout',
               leading: Icons.logout,
-              onTap: () {},
+              onTap: () {
+                authprovider.signOut();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return const LoginScreen();
+                }));
+              },
             ),
           ],
         ),

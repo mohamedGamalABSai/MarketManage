@@ -27,6 +27,8 @@ class AuthProvider with ChangeNotifier {
     try {
       _errorMessage = null;
       notifyListeners();
+      print(email);
+      print(password);
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       isLoggedIn = true;
