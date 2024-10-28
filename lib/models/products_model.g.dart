@@ -7,30 +7,29 @@ part of 'products_model.dart';
 // **************************************************************************
 
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
-      id: json['id'] as String?,
-      title: json['title'] as String?,
-      imageUrl: json['imageUrl'] as String?,
-      description: json['description'] as String?,
-      productCategoryName: json['productCategoryName'] as String?,
-      price: (json['price'] as num?)?.toDouble(),
-      salePrice: (json['salePrice'] as num?)?.toDouble(),
-      isOnSale: json['isOnSale'] as bool,
-      discountPercentage: json['discountPercentage'] as String?,
-      scale: json['scale'] as String?,
-      stock: (json['stock'] as num?)?.toInt(),
+      barcode: (json['Id'] as num).toInt(),
+      name: json['Name'] as String,
+      pictureName: json['PictureName'] as String,
+      categoryName: json['CategoryName'] as String,
+      campaignDiscountedPrice:
+          (json['CampaignDiscountedPrice'] as num?)?.toDouble() ?? 0.0,
+      discountedPrice: (json['DiscountedPrice'] as num).toDouble(),
+      price: (json['Price'] as num).toDouble(),
+      isOutlet: json['IsOutlet'] as bool,
+      sizes: json['Sizes'] as String,
+      stock: (json['Stock'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'imageUrl': instance.imageUrl,
-      'productCategoryName': instance.productCategoryName,
+      'name': instance.name,
+      'pictureName': instance.pictureName,
+      'categoryName': instance.categoryName,
       'price': instance.price,
-      'salePrice': instance.salePrice,
-      'discountPercentage': instance.discountPercentage,
-      'isOnSale': instance.isOnSale,
-      'scale': instance.scale,
+      'discountedPrice': instance.discountedPrice,
+      'campaignDiscountedPrice': instance.campaignDiscountedPrice,
+      'isOutlet': instance.isOutlet,
       'stock': instance.stock,
+      'barcode': instance.barcode,
+      'sizes': instance.sizes,
     };

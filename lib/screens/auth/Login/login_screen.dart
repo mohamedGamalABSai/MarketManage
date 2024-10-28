@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vegan_admin_panel/consts/colors.dart';
 import 'package:vegan_admin_panel/consts/responsive.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/components/mobile_screen.dart';
-import 'package:vegan_admin_panel/test/Screens/components/background.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/components/mobile_screen.dart';
+import 'package:vegan_admin_panel/screens/auth/components/background.dart';
 
 import 'components/login_form.dart';
 import 'components/login_screen_top_image.dart';

@@ -30,7 +30,7 @@ class ProductCardBuilder extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.network(
-            "https://dfcdn.defacto.com.tr/376/B3896AX_24SP_ER105_01_02.jpg",
+            productModel!.pictureName,
             width: 180,
             height: 150,
             fit: BoxFit.contain,
@@ -41,7 +41,7 @@ class ProductCardBuilder extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${productModel?.title}',
+                  '${productModel?.name}',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(fontSize: 15.sp),
@@ -61,11 +61,8 @@ class ProductCardBuilder extends StatelessWidget {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: productModel!.isOnSale
-                                        ? productModel!.salePrice
-                                            ?.toStringAsFixed(2)
-                                        : productModel!.price
-                                            ?.toStringAsFixed(2),
+                                    text:
+                                        productModel!.price.toStringAsFixed(2),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
@@ -74,7 +71,7 @@ class ProductCardBuilder extends StatelessWidget {
                                 ]),
                           ),
                           Visibility(
-                            visible: productModel!.isOnSale,
+                            visible: true,
                             child: RichText(
                               text: TextSpan(
                                   text: 'EGP ',
@@ -98,7 +95,7 @@ class ProductCardBuilder extends StatelessWidget {
                         ]),
                     const Spacer(),
                     Text(
-                      "${productModel!.scale}",
+                      "${productModel!.campaignDiscountedPrice}",
                       style: const TextStyle(fontSize: 15),
                     )
                   ],
@@ -132,19 +129,15 @@ class ProductCardBuilder extends StatelessWidget {
                     myProvider.selectScreen(1,
                         isEdit: true,
                         passedAttributes: ProductModel(
-                            id: productModel?.id,
-                            title: productModel?.title,
-                            description: productModel?.description,
-                            imageUrl: productModel?.imageUrl,
-                            productCategoryName:
-                                productModel?.productCategoryName,
-                            price: productModel?.price,
-                            salePrice: productModel?.salePrice,
-                            isOnSale: productModel!.isOnSale,
-                            scale: productModel?.scale,
-                            stock: productModel?.stock,
-                            discountPercentage:
-                                productModel?.discountPercentage));
+                            barcode: productModel!.barcode,
+                            name: productModel!.name,
+                            pictureName: productModel!.pictureName,
+                            categoryName: productModel!.categoryName,
+                            discountedPrice: productModel!.discountedPrice,
+                            price: productModel!.price,
+                            isOutlet: false,
+                            sizes: productModel!.sizes,
+                            stock: productModel!.stock));
                   },
                   child: const Row(
                     children: [

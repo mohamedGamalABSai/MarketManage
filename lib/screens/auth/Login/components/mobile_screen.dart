@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/components/login_form.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/components/login_screen_top_image.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/components/login_form.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/components/login_screen_top_image.dart';
 
 class MobileLoginScreen extends StatelessWidget {
   const MobileLoginScreen({

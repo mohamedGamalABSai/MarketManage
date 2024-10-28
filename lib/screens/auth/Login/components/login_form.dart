@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vegan_admin_panel/consts/colors.dart';
 import 'package:vegan_admin_panel/main.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/provider/login_provider.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/provider/login_provider.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});

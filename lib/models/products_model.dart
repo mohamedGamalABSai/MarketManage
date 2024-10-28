@@ -1,37 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 part 'products_model.g.dart';
+
 @JsonSerializable()
-class ProductModel with ChangeNotifier{
-   String? id;
-   String? title;
-   String? description;
-   String? imageUrl;
-   String? productCategoryName;
-   double? price;
-   double? salePrice;
-   String? discountPercentage;
-   bool isOnSale;
-   String? scale;
-   int? stock;
+class ProductModel {
+  final String name, pictureName, categoryName;
+  final double price, discountedPrice;
+  final double? campaignDiscountedPrice;
+  final bool isOutlet;
+  final int stock, barcode;
+  final String sizes;
 
   ProductModel({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.description,
-    required this.productCategoryName,
+    required this.barcode,
+    required this.name,
+    required this.pictureName,
+    required this.categoryName,
+    this.campaignDiscountedPrice = 0.0,
+    required this.discountedPrice,
     required this.price,
-    required this.salePrice,
-    required this.isOnSale,
-    required this.discountPercentage,
-    required this.scale,
-    required this.stock
+    required this.isOutlet,
+    required this.sizes,
+    required this.stock,
   });
 
-
-  factory ProductModel.fromJson(Map<String, dynamic>? json) => _$ProductModelFromJson(json!);
-
-  Map<String, dynamic> toMap () => _$ProductModelToJson(this);
+  factory ProductModel.fromJson(Map<String, dynamic>? json) =>
+      _$ProductModelFromJson(json!);
 }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -6,7 +5,6 @@ import 'package:vegan_admin_panel/consts/colors.dart';
 import 'package:vegan_admin_panel/loading_screen.dart';
 
 import '../../consts/responsive.dart';
-import '../../models/products_model.dart';
 import '../../provider/products_provider.dart';
 import '../../provider/side_menu_provider.dart';
 import '../../widgets/app_bar.dart';
@@ -32,28 +30,28 @@ class ProductsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Consumer<ProductsProvider>(
-          builder: (_, provider, __) => StreamBuilder(
-            stream:
-                FirebaseFirestore.instance.collection('Products').snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingPage();
-              }
-              if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
-                return _buildProductGrid(context, snapshot);
-              } else {
-                return _buildNoProductsPlaceholder(context);
-              }
-            },
-          ),
+          builder: (_, provider, __) {
+            return FutureBuilder(
+              future: provider.fetchProducts(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const LoadingPage();
+                }
+                if (provider.productList2.isNotEmpty) {
+                  return _buildProductGrid(context, provider);
+                } else {
+                  return _buildNoProductsPlaceholder(context);
+                }
+              },
+            );
+          },
         ),
       ),
       floatingActionButton: const AddProductButton(),
     );
   }
 
-  Widget _buildProductGrid(
-      BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+  Widget _buildProductGrid(BuildContext context, ProductsProvider provider) {
     return GridView.builder(
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,11 +64,10 @@ class ProductsScreen extends StatelessWidget {
         crossAxisSpacing: 15,
         childAspectRatio: Responsive.isDesktop(context) ? 0.93 : 0.85,
       ),
-      itemCount: snapshot.data!.docs.length,
+      itemCount: provider.productList2.length,
       itemBuilder: (context, index) {
         return ProductCardBuilder(
-          productModel: ProductModel.fromJson(
-              snapshot.data!.docs[index].data() as Map<String, dynamic>),
+          productModel: provider.productList2[index],
         );
       },
     );
@@ -121,20 +118,7 @@ class AddProductButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          provider.selectScreen(2,
-              passedAttributes: ProductModel(
-                id: '',
-                title: '',
-                description: '',
-                imageUrl: null,
-                productCategoryName: null,
-                price: 0.0,
-                salePrice: 0.0,
-                isOnSale: false,
-                scale: '1 Kg',
-                stock: 0,
-                discountPercentage: '',
-              ));
+          // Example: Navigate to product adding screen or functionality
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -12,8 +12,7 @@ import 'package:vegan_admin_panel/provider/loading_provider.dart';
 import 'package:vegan_admin_panel/provider/order_provider.dart';
 import 'package:vegan_admin_panel/provider/products_provider.dart';
 import 'package:vegan_admin_panel/screens/home_screen.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/login_screen.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/provider/login_provider.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/provider/login_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +58,8 @@ class ToFixNullValueFromFireBase extends StatelessWidget {
       builder: (context, loadingProvider, child) {
         return loadingProvider.isLoading
             ? const LoadingPage()
-            : const LoginScreen();
+            : const LoadedScreen();
+        // const LoginScreen();
       },
     );
   }
@@ -82,3 +82,58 @@ class LoadedScreen extends StatelessWidget {
     );
   }
 }
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'package:vegan_admin_panel/test_json/provider.dart';
+
+// void main() {
+//   runApp(
+//     MultiProvider(
+//       providers: [
+//         ChangeNotifierProvider(create: (_) => ProductProvider()),
+//       ],
+//       child: MyApp(),
+//     ),
+//   );
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Product App',
+//       home: ProductListScreen(),
+//     );
+//   }
+// }
+
+// class ProductListScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final productProvider = Provider.of<ProductProvider>(context);
+
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Products')),
+//       body: FutureBuilder(
+//         future: productProvider.fetchProducts(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           } else {
+//             return ListView.builder(
+//               itemCount: productProvider.products.length,
+//               itemBuilder: (context, index) {
+//                 final product = productProvider.products[index];
+//                 return ListTile(
+//                   title: Text(product.name),
+//                   subtitle: Text('Price: \$${product.price}'),
+//                   leading: Image.network(product.pictureName),
+//                 );
+//               },
+//             );
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }

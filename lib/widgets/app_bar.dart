@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:vegan_admin_panel/consts/colors.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/login_screen.dart';
-import 'package:vegan_admin_panel/test/Screens/Login/provider/login_provider.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/login_screen.dart';
+import 'package:vegan_admin_panel/screens/auth/Login/provider/login_provider.dart';
 import 'package:vegan_admin_panel/widgets/profile_card.dart';
 import 'package:vegan_admin_panel/widgets/search_feild.dart';
 
