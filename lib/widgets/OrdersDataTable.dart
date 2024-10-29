@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:vegan_admin_panel/models/orders_model/order_model.dart';
 
+import 'package:intl/intl.dart';
 
 class OrdersDataTable extends StatelessWidget {
   const OrdersDataTable({super.key, required this.ordersData});
@@ -11,11 +11,21 @@ class OrdersDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formatDateString(String dateString) {
+      // Parse the date string into a DateTime object
+      DateTime dateTime = DateTime.parse(dateString);
+
+      // Format the DateTime object to the desired format
+      String formattedDate = DateFormat('dd MMMM HH:MM').format(dateTime);
+
+      return formattedDate;
+    }
+
     return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: SizedBox(
-            width: double.infinity,
             child: DataTable(
                 dividerThickness: 0,
                 showCheckboxColumn: true,
@@ -70,7 +80,8 @@ class OrdersDataTable extends StatelessWidget {
                                   color: Colors.grey[600], fontSize: 13.sp),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis)),
-                          DataCell(Text('${ordersData[index].createdAt}',
+                          DataCell(Text(
+                              formatDateString(ordersData[index].createdAt!),
                               style: TextStyle(
                                   color: Colors.grey[600], fontSize: 13.sp),
                               maxLines: 1,

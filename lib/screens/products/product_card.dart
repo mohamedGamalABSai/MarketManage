@@ -82,7 +82,7 @@ class ProductCardBuilder extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text: productModel!.price
-                                          ?.toStringAsFixed(2),
+                                          .toStringAsFixed(2),
                                       style: const TextStyle(
                                           fontSize: 12,
                                           decoration:

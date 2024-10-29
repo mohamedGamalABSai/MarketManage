@@ -17,8 +17,6 @@ class SideMenuProvider with ChangeNotifier {
       );
     } else if (index == 2) {
       selectedWidget = const OrdersScreen();
-    } else {
-      selectedWidget = Container();
     }
     notifyListeners();
   }

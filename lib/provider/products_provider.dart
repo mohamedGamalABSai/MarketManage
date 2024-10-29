@@ -53,9 +53,10 @@ class ProductsProvider with ChangeNotifier {
     try {
       // Reference to your JSON file in Firebase Storage
       final ref = FirebaseStorage.instance.ref().child('defacto_products.json');
-
+      print(ref);
       // Get data in Bytes
       final Uint8List? bytes = await ref.getData();
+      print(bytes);
 
       // Convert Byte Array to String
       final String jsonData = utf8.decode(List.from(bytes!));
@@ -64,6 +65,7 @@ class ProductsProvider with ChangeNotifier {
       final data = json.decode(jsonData);
       // Convert Decoded JSON data to Object
       for (var element in data) {
+        print(element);
         productList2.add(ProductModel.fromJson(element));
       }
 

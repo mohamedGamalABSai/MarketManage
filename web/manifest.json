@@ -8,7 +8,16 @@
     "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    
+
+        "origin": ["*"],
+        "responseHeader": ["Content-Type"],
+        "method": ["GET", "HEAD", "DELETE"],
+        "maxAgeSeconds": 3600
+      ,
+    
     "icons": [
+        
         {
             "src": "icons/Icon-192.png",
             "sizes": "192x192",

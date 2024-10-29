@@ -44,7 +44,7 @@ PreferredSizeWidget myAppBar({
       const Spacer(flex: 1),
       SearchField(),
       const SizedBox(width: 25),
-      ..._buildIconButtons(),
+      _buildIconButtons(),
       const SizedBox(width: 15),
       _buildProfileMenu(authProvider),
       const SizedBox(width: 25),
@@ -52,23 +52,18 @@ PreferredSizeWidget myAppBar({
   );
 }
 
-List<Widget> _buildIconButtons() {
-  final icons = [
-    IconlyBroken.notification,
-    IconlyBroken.setting,
-  ];
+Widget _buildIconButtons() {
+  final icons = IconlyBroken.setting;
 
-  return icons.map((iconData) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7.5),
-      child: BadgedIcon(
-        icon: IconButton(
-          onPressed: () {},
-          icon: Icon(iconData),
-        ),
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 7.5),
+    child: BadgedIcon(
+      icon: IconButton(
+        onPressed: () {},
+        icon: Icon(icons),
       ),
-    );
-  }).toList();
+    ),
+  );
 }
 
 Widget _buildProfileMenu(AuthProvider authprovider) {

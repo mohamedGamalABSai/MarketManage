@@ -9,7 +9,7 @@ class SearchField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        width: 250,
+        width: MediaQuery.of(context).size.width * 0.3,
         height: 40,
         decoration: BoxDecoration(
             color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),

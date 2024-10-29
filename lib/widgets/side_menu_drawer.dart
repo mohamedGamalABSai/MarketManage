@@ -30,30 +30,45 @@ class SideBarXExample extends StatelessWidget {
 
   SidebarXTheme _sidebarTheme(TextStyle textStyle) {
     return SidebarXTheme(
-      width: 75,
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        color: AppColors.whiteColor,
+        borderRadius: BorderRadius.circular(20),
       ),
-      iconTheme: const IconThemeData(color: AppColors.brownColor),
-      textStyle: textStyle,
+      hoverColor: AppColors.lightBrownColor,
+      textStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
       selectedTextStyle: const TextStyle(color: Colors.white),
+      hoverTextStyle: const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
       itemTextPadding: const EdgeInsets.only(left: 30),
       selectedItemTextPadding: const EdgeInsets.only(left: 30),
-      selectedIconTheme: const IconThemeData(color: Colors.white),
+      itemDecoration: BoxDecoration(
+        color: AppColors.whiteColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.lightWhiteColor),
+      ),
       selectedItemDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white30),
+        border: Border.all(
+          color: AppColors.lightWhiteColor,
+        ),
         gradient: const LinearGradient(
           colors: [AppColors.lightBrownColor, AppColors.brownColor],
         ),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black26,
+            color: Colors.black.withOpacity(0.28),
             blurRadius: 30,
-          ),
+          )
         ],
+      ),
+      iconTheme: const IconThemeData(
+          color: AppColors.brownColor, size: 20, weight: 60),
+      selectedIconTheme: const IconThemeData(
+        color: AppColors.whiteColor,
+        size: 20,
       ),
     );
   }
@@ -93,7 +108,7 @@ class SideBarXExample extends StatelessWidget {
   List<SidebarXItem> _buildSidebarItems(SideMenuProvider sideMenuProvider) {
     return [
       SidebarXItem(
-        icon: Icons.inventory_2_outlined,
+        icon: (Icons.inventory_2_outlined),
         label: 'Products',
         onTap: () => sideMenuProvider.selectScreen(0),
       ),

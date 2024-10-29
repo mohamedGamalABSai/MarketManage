@@ -21,6 +21,27 @@ abstract class AppStyles {
             ? getResponsiveFontSize(context, fontSize: 25)
             : getResponsiveFontSize(context, fontSize: 30));
   }
+
+  static TextStyle styleRegular14(BuildContext context) {
+    return TextStyle(
+        color: AppColors.whiteColor,
+        fontWeight: FontWeight.w500,
+        fontSize: ScreenSize.screeenWidth(context) < 1200
+            ? getResponsiveFontSize(context, fontSize: 14)
+            : getResponsiveFontSize(context, fontSize: 18));
+  }
+
+  static TextStyle styleRegular25(BuildContext context) {
+    return TextStyle(
+      color: AppColors.whiteColor,
+      fontWeight: FontWeight.w500,
+      fontSize: ScreenSize.screeenWidth(context) < 600
+          ? getResponsiveFontSize(context, fontSize: 14)
+          : ScreenSize.screeenWidth(context) < 1200
+              ? getResponsiveFontSize(context, fontSize: 18)
+              : getResponsiveFontSize(context, fontSize: 25),
+    );
+  }
 }
 
 double getResponsiveFontSize(BuildContext context, {required double fontSize}) {
