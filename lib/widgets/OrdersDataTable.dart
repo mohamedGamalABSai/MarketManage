@@ -26,6 +26,9 @@ class OrdersDataTable extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: SizedBox(
+            width: MediaQuery.of(context).size.width > 1200
+                ? MediaQuery.of(context).size.width * 1
+                : MediaQuery.of(context).size.width * 1.5,
             child: DataTable(
                 dividerThickness: 0,
                 showCheckboxColumn: true,
