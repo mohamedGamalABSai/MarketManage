@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 import 'package:vegan_admin_panel/loading_screen.dart';
-import 'package:vegan_admin_panel/models/products_model.dart';
 import 'package:vegan_admin_panel/widgets/add_product_button.dart';
 import 'package:vegan_admin_panel/widgets/error_widget.dart';
 
@@ -56,14 +54,18 @@ class ProductsScreen extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: Responsive.isDesktop(context)
+        crossAxisCount: Responsive.isWeb(context)
             ? 4
             : Responsive.isTablet(context)
                 ? 3
-                : 2,
+                : 1,
         mainAxisSpacing: 10,
         crossAxisSpacing: 15,
-        childAspectRatio: Responsive.isDesktop(context) ? 0.93 : 0.85,
+        childAspectRatio: Responsive.isWeb(context)
+            ? .9
+            : Responsive.isTablet(context)
+                ? 0.7
+                : 1.2,
       ),
       itemCount: provider.productList2.length,
       itemBuilder: (context, index) {

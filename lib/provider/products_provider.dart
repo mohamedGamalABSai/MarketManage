@@ -6,30 +6,63 @@
 // import 'package:vegan_admin_panel/models/products_model.dart';
 
 // class ProductsProvider with ChangeNotifier {
-//   final List<ProductModel> productList = [];
+//   final List<ProductModel> productList2 = [];
 
 //   Future<void> fetchProducts() async {
-//     productList.clear();
-//     debugPrint('Fetching products...');
+//     productList2.clear();
+//     debugPrint('Fetching...');
+
 //     try {
 //       final ref = FirebaseStorage.instance.ref().child('defacto_products.json');
+
 //       final Uint8List? bytes = await ref.getData();
-
 //       if (bytes != null) {
-//         print("not null ");
 //         final String jsonData = utf8.decode(bytes);
-//         final data = json.decode(jsonData) as List;
+//         final List<dynamic> data = json.decode(jsonData);
 
-//         for (var element in data) {
-//           productList.add(ProductModel.fromJson(element));
-//         }
-//         debugPrint(productList[0].name);
-//         debugPrint(productList.length.toString());
-
-//         notifyListeners(); // Notify listeners to update UI
+//         productList2
+//             .addAll(data.map((element) => ProductModel.fromJson(element)));
+//       } else {
+//         debugPrint('No data found in Firebase Storage.');
 //       }
 //     } catch (e) {
 //       debugPrint('Error fetching JSON data: $e');
+//     }
+//   }
+
+//   Future<void> addProduct(ProductModel newProduct) async {
+//     productList2.add(newProduct);
+//     await _saveProductsToFirebase();
+//     notifyListeners();
+//   }
+
+//   Future<void> updateProduct(int barcode, ProductModel updatedProduct) async {
+//     final index =
+//         productList2.indexWhere((product) => product.barcode == barcode);
+//     if (index != -1) {
+//       productList2[index] = updatedProduct;
+//       await _saveProductsToFirebase();
+//       notifyListeners();
+//     }
+//   }
+
+//   Future<void> _saveProductsToFirebase() async {
+//     try {
+//       final ref = FirebaseStorage.instance.ref().child('defacto_products.json');
+
+//       final List<Map<String, dynamic>> jsonData =
+//           productList2.map((product) => product.toJson()).toList();
+//       final String jsonString = json.encode(jsonData);
+
+//       final metadata = SettableMetadata(contentType: 'application/json');
+
+//       await ref.putData(
+//         Uint8List.fromList(utf8.encode(jsonString)),
+//         metadata,
+//       );
+//       debugPrint('Products saved successfully');
+//     } catch (e) {
+//       debugPrint('Error saving products: $e');
 //     }
 //   }
 // }
@@ -39,44 +72,79 @@ import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:vegan_admin_panel/consts/consts.dart';
 import 'package:vegan_admin_panel/models/products_model.dart';
-import 'package:vegan_admin_panel/provider/categorized_products_provider.dart';
 
 class ProductsProvider with ChangeNotifier {
   final List<ProductModel> productList2 = [];
 
   Future<void> fetchProducts() async {
     productList2.clear();
-
     debugPrint('Fetching...');
+
     try {
-      // Reference to your JSON file in Firebase Storage
       final ref = FirebaseStorage.instance.ref().child('defacto_products.json');
-      print(ref);
-      // Get data in Bytes
+
       final Uint8List? bytes = await ref.getData();
-      print(bytes);
+      if (bytes != null) {
+        final String jsonData = utf8.decode(bytes);
+        final List<dynamic> data = json.decode(jsonData);
 
-      // Convert Byte Array to String
-      final String jsonData = utf8.decode(List.from(bytes!));
-
-      // Decode the JSON data
-      final data = json.decode(jsonData);
-      // Convert Decoded JSON data to Object
-      for (var element in data) {
-        print(element);
-        productList2.add(ProductModel.fromJson(element));
+        productList2
+            .addAll(data.map((element) => ProductModel.fromJson(element)));
+      } else {
+        debugPrint('No data found in Firebase Storage.');
       }
-
-      debugPrint(productList2[0].name);
-      debugPrint(productList2.length.toString());
-
-      print(productList2);
-      CategorizedProductProvider().getCategories();
-      // Print the JSON data or update the state to display it
     } catch (e) {
       debugPrint('Error fetching JSON data: $e');
+    }
+  }
+
+  Future<void> addProduct(ProductModel newProduct) async {
+    productList2.add(newProduct);
+    await _saveProductsToFirebase();
+    notifyListeners();
+  }
+
+  Future<void> updateProduct(int barcode, ProductModel updatedProduct) async {
+    final index =
+        productList2.indexWhere((product) => product.barcode == barcode);
+    if (index != -1) {
+      productList2[index] = updatedProduct;
+      await _saveProductsToFirebase();
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteProduct(int barcode) async {
+    final index =
+        productList2.indexWhere((product) => product.barcode == barcode);
+    if (index != -1) {
+      productList2.removeAt(index);
+      await _saveProductsToFirebase();
+      notifyListeners();
+      debugPrint('Product deleted successfully');
+    } else {
+      debugPrint('Product not found');
+    }
+  }
+
+  Future<void> _saveProductsToFirebase() async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child('defacto_products.json');
+
+      final List<Map<String, dynamic>> jsonData =
+          productList2.map((product) => product.toJson()).toList();
+      final String jsonString = json.encode(jsonData);
+
+      final metadata = SettableMetadata(contentType: 'application/json');
+
+      await ref.putData(
+        Uint8List.fromList(utf8.encode(jsonString)),
+        metadata,
+      );
+      debugPrint('Products saved successfully');
+    } catch (e) {
+      debugPrint('Error saving products: $e');
     }
   }
 }

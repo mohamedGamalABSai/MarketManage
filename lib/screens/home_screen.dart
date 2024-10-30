@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // We want this side menu only for large screen
-                if (Responsive.isDesktop(context))
+                if (Responsive.isWeb(context))
                   SideBarXExample(controller: controller),
                 Expanded(
                     // It takes 5/6 part of the screen

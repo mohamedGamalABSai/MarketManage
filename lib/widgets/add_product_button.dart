@@ -24,9 +24,7 @@ class AddProductButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          onPressed: () {
-            // Example: Navigate to product adding screen or functionality
-          },
+          onPressed: () {},
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

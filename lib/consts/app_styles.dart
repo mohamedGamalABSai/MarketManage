@@ -13,6 +13,15 @@ abstract class AppStyles {
             : getResponsiveFontSize(context, fontSize: 20));
   }
 
+  static TextStyle styleRegular16(BuildContext context) {
+    return TextStyle(
+        color: AppColors.blackWight,
+        fontWeight: FontWeight.w500,
+        fontSize: ScreenSize.screeenWidth(context) < 1200
+            ? getResponsiveFontSize(context, fontSize: 16)
+            : getResponsiveFontSize(context, fontSize: 18));
+  }
+
   static TextStyle styleRegular30(BuildContext context) {
     return TextStyle(
         color: AppColors.brownColor,
@@ -27,8 +36,17 @@ abstract class AppStyles {
         color: AppColors.whiteColor,
         fontWeight: FontWeight.w500,
         fontSize: ScreenSize.screeenWidth(context) < 1200
-            ? getResponsiveFontSize(context, fontSize: 14)
+            ? getResponsiveFontSize(context, fontSize: 16)
             : getResponsiveFontSize(context, fontSize: 18));
+  }
+
+  static TextStyle styleRegular12(BuildContext context) {
+    return TextStyle(
+        color: AppColors.greyColor,
+        fontWeight: FontWeight.w500,
+        fontSize: ScreenSize.screeenWidth(context) < 1200
+            ? getResponsiveFontSize(context, fontSize: 12)
+            : getResponsiveFontSize(context, fontSize: 14));
   }
 
   static TextStyle styleRegular25(BuildContext context) {

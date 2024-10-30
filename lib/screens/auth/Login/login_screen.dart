@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Responsive(
                 mobile: MobileLoginScreen(),
-                desktop: Row(
+                web: Row(
                   children: [
                     Expanded(
                       child: LoginScreenTopImage(),

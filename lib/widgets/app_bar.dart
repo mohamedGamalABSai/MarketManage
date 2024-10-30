@@ -23,7 +23,7 @@ PreferredSizeWidget myAppBar({
     backgroundColor: AppColors.whiteColor,
     toolbarHeight: 75,
     actions: [
-      if (!Responsive.isDesktop(context))
+      if (!Responsive.isWeb(context))
         IconButton(
           onPressed: () => Scaffold.of(context).openDrawer(),
           icon: const Icon(Icons.menu_rounded),
@@ -40,7 +40,7 @@ PreferredSizeWidget myAppBar({
           ),
         ),
       const SizedBox(width: 15),
-      if (Responsive.isDesktop(context)) const Spacer(flex: 2),
+      if (Responsive.isWeb(context)) const Spacer(flex: 2),
       const Spacer(flex: 1),
       SearchField(),
       const SizedBox(width: 25),
@@ -53,14 +53,14 @@ PreferredSizeWidget myAppBar({
 }
 
 Widget _buildIconButtons() {
-  final icons = IconlyBroken.setting;
+  const icons = IconlyBroken.setting;
 
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 7.5),
     child: BadgedIcon(
       icon: IconButton(
         onPressed: () {},
-        icon: Icon(icons),
+        icon: const Icon(icons),
       ),
     ),
   );
