@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:vegan_admin_panel/api/api_consumer.dart';
-import 'package:vegan_admin_panel/api/endpoint.dart';
 
 class LoadingProvider extends ChangeNotifier {
   bool _isLoading = true;

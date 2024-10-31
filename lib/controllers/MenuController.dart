@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -5,17 +6,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class MyMenuController extends ChangeNotifier {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _gridScaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<ScaffoldState> _addProductScaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _addProductScaffoldKey =
+      GlobalKey<ScaffoldState>();
   // Getters
   GlobalKey<ScaffoldState> get getScaffoldKey => _scaffoldKey;
   GlobalKey<ScaffoldState> get getGridScaffoldKey => _gridScaffoldKey;
-  GlobalKey<ScaffoldState> get getAddProductScaffoldKey => _addProductScaffoldKey;
-
-
+  GlobalKey<ScaffoldState> get getAddProductScaffoldKey =>
+      _addProductScaffoldKey;
 
   // Callbacks
   void controlDashboardMenu() {
@@ -37,11 +37,10 @@ class MyMenuController extends ChangeNotifier {
   }
 }
 
-class AlertDialogNotifier with ChangeNotifier{
-
+class AlertDialogNotifier with ChangeNotifier {
   double discountPercentage = 0;
-  calculatePercentage(int price,int discountedPrice){
-    discountPercentage = (1-(discountedPrice / price)) * 100;
+  calculatePercentage(int price, int discountedPrice) {
+    discountPercentage = (1 - (discountedPrice / price)) * 100;
   }
 
   bool checkBoxValue = false;
@@ -56,12 +55,6 @@ class AlertDialogNotifier with ChangeNotifier{
     notifyListeners();
   }
 
-  String? radioValue = '1 Kg';
-  void changeRadioValue(value) {
-    radioValue = value;
-    notifyListeners();
-  }
-
   File? pickedImage;
   late Uint8List webImage = Uint8List(8);
   Future<void> pickImage(productUid) async {
@@ -71,26 +64,25 @@ class AlertDialogNotifier with ChangeNotifier{
       if (image != null) {
         var selected = File(image.path);
         pickedImage = selected;
-        print(image.name);
+        log(image.name);
         notifyListeners();
       } else {
-        print('No image has been picked');
+        log('No image has been picked');
       }
     } else if (kIsWeb) {
       final ImagePicker picker = ImagePicker();
       XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        print(image.name);
         var f = await image.readAsBytes();
         webImage = f;
         pickedImage = File('a');
         uploadImageToStorage(productUid);
         notifyListeners();
       } else {
-        print('No image has been picked');
+        log('No image has been picked');
       }
     } else {
-      print('Something went wrong');
+      log('Something went wrong');
     }
   }
 
@@ -105,17 +97,22 @@ class AlertDialogNotifier with ChangeNotifier{
           .child('ProductImages/')
           .child('$productUid.jpg');
       if (kIsWeb) {
-        await ref.putData(webImage,SettableMetadata(contentType: 'jpg'));
+        await ref.putData(webImage, SettableMetadata(contentType: 'jpg'));
       } else {
         await ref.putFile(pickedImage!);
       }
-      imageUrl = await ref.getDownloadURL().then((value){if(value.isNotEmpty){loadingUrl = false; notifyListeners(); print(value);}return null;});
-        debugPrint(imageUrl);
-    }
-    on FirebaseException catch (error){
+      imageUrl = await ref.getDownloadURL().then((value) {
+        if (value.isNotEmpty) {
+          loadingUrl = false;
+          notifyListeners();
+          log(value);
+        }
+        return null;
+      });
+      debugPrint(imageUrl);
+    } on FirebaseException catch (error) {
       print(error.message);
-    }
-    catch(error){
+    } catch (error) {
       print(error);
     }
   }

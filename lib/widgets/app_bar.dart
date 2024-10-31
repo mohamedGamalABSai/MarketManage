@@ -44,25 +44,9 @@ PreferredSizeWidget myAppBar({
       const Spacer(flex: 1),
       SearchField(),
       const SizedBox(width: 25),
-      _buildIconButtons(),
-      const SizedBox(width: 15),
       _buildProfileMenu(authProvider),
       const SizedBox(width: 25),
     ],
-  );
-}
-
-Widget _buildIconButtons() {
-  const icons = IconlyBroken.setting;
-
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 7.5),
-    child: BadgedIcon(
-      icon: IconButton(
-        onPressed: () {},
-        icon: const Icon(icons),
-      ),
-    ),
   );
 }
 
