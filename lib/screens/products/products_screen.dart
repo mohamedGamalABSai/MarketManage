@@ -12,6 +12,10 @@ import 'product_card.dart';
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({super.key});
 
+  final TextEditingController productName = TextEditingController();
+  final TextEditingController priceText = TextEditingController();
+  final TextEditingController discountedPrice = TextEditingController();
+  final TextEditingController description = TextEditingController();
   final FocusNode productNameFocusNode = FocusNode();
   final FocusNode priceFocusNode = FocusNode();
   final FocusNode discountedPriceFocusNode = FocusNode();

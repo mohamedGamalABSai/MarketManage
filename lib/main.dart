@@ -1,5 +1,3 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +8,7 @@ import 'package:vegan_admin_panel/consts/colors.dart';
 import 'package:vegan_admin_panel/controllers/MenuController.dart';
 import 'package:vegan_admin_panel/loading_screen.dart';
 import 'package:vegan_admin_panel/provider/loading_provider.dart';
+import 'package:vegan_admin_panel/provider/menu.dart';
 import 'package:vegan_admin_panel/provider/order_provider.dart';
 import 'package:vegan_admin_panel/provider/products_provider.dart';
 import 'package:vegan_admin_panel/screens/home_screen.dart';

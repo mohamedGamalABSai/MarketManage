@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:vegan_admin_panel/provider/menu.dart';
 import 'package:vegan_admin_panel/provider/products_provider.dart';
-import '../../controllers/MenuController.dart';
 import '../../models/products_model.dart';
 
 class ProductMedia extends StatelessWidget {

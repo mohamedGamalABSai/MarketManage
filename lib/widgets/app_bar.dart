@@ -8,7 +8,6 @@ import 'package:vegan_admin_panel/widgets/profile_card.dart';
 import 'package:vegan_admin_panel/widgets/search_feild.dart';
 
 import '../consts/responsive.dart';
-import 'badged_icon.dart';
 
 PreferredSizeWidget myAppBar({
   required BuildContext context,

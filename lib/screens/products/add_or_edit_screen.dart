@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:vegan_admin_panel/consts/app_styles.dart';
+import 'package:vegan_admin_panel/consts/colors.dart';
+import 'package:vegan_admin_panel/provider/menu.dart';
 import 'package:vegan_admin_panel/provider/products_provider.dart';
 import 'package:vegan_admin_panel/provider/side_menu_provider.dart';
 import 'package:vegan_admin_panel/widgets/choose_category.dart';
@@ -11,7 +14,6 @@ import 'package:vegan_admin_panel/widgets/product_info_section.dart';
 import 'package:vegan_admin_panel/widgets/product_media.dart';
 import 'package:vegan_admin_panel/widgets/save_exit_buttons.dart';
 
-import '../../controllers/MenuController.dart';
 import '../../models/products_model.dart';
 import '../../widgets/app_bar.dart';
 
@@ -55,29 +57,31 @@ class AddOrEditScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Edit Product',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                style: AppStyles.styleRegular20(context)
+                                    .copyWith(color: AppColors.blackWight),
                               ),
                               Text(
-                                'Dashboard > Products > ${productModel?.name} > Edit Product',
-                                style: const TextStyle(fontSize: 15),
+                                'Dashboard > Products > Edit Product',
+                                style: AppStyles.styleRegular14(context)
+                                    .copyWith(color: AppColors.blackWight),
                               )
                             ],
                           )
-                        : const Column(
+                        : Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Add Product',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                style: AppStyles.styleRegular20(context)
+                                    .copyWith(color: AppColors.blackWight),
                               ),
                               Text(
                                 'Dashboard > Products > Add Product',
-                                style: TextStyle(fontSize: 15),
+                                style: AppStyles.styleRegular14(context)
+                                    .copyWith(color: AppColors.blackWight),
                               )
                             ],
                           ),
@@ -88,6 +92,7 @@ class AddOrEditScreen extends StatelessWidget {
                       provider: provider,
                       isEdit: isEdit,
                       productModel: productModel,
+                      notifier: notifier,
                     )
                   ],
                 ),

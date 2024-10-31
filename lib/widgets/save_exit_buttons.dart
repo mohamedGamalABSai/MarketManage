@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vegan_admin_panel/models/products_model.dart';
+import 'package:vegan_admin_panel/provider/menu.dart';
 import 'package:vegan_admin_panel/provider/products_provider.dart';
 import 'package:vegan_admin_panel/provider/side_menu_provider.dart';
 
@@ -11,6 +12,7 @@ class SaveExitButtons extends StatelessWidget {
     required this.isEdit,
     required this.barCode,
     required this.productModel,
+    required this.notifier,
   });
 
   final SideMenuProvider myProvider;
@@ -18,6 +20,7 @@ class SaveExitButtons extends StatelessWidget {
   final int barCode;
   final bool isEdit;
   final ProductModel? productModel;
+  final AlertDialogNotifier notifier;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +70,6 @@ class SaveExitButtons extends StatelessWidget {
             !isEdit
                 ? provider.addProduct().then((_) {
                     myProvider.selectScreen(0);
-
-                    // Navigate to the home screen after adding the product
                   })
                 : provider
                     .updateProduct(
@@ -79,7 +80,7 @@ class SaveExitButtons extends StatelessWidget {
                           ? provider.nameController.text
                           : productModel!.name,
                       pictureName: provider.isNameNotEmpty
-                          ? provider.pictureName!
+                          ? notifier.imageUrl!
                           : productModel!.pictureName,
                       categoryName: provider.isCategoryNotEmpty
                           ? provider.categoryName!
